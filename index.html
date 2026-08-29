@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f4f1ea">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>知序 · 我的学习日程</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div><p class="eyebrow" id="dateLabel"></p><h1 id="pageTitle">今日计划</h1></div>
+    <button class="icon-button" id="quickAdd" aria-label="快速新增">＋</button>
+  </header>
+  <main id="app" aria-live="polite"></main>
+  <nav class="bottom-nav" aria-label="主导航">
+    <a href="#today" data-route="today"><span>⌂</span>今日</a>
+    <a href="#week" data-route="week"><span>▦</span>本周</a>
+    <a href="#papers" data-route="papers"><span>✎</span>论文</a>
+    <a href="#fitness" data-route="fitness"><span>◇</span>健身</a>
+    <a href="#stats" data-route="stats"><span>◔</span>统计</a>
+  </nav>
+  <dialog id="taskDialog">
+    <form id="taskForm" method="dialog">
+      <div class="dialog-head"><h2 id="dialogTitle">新增任务</h2><button type="button" class="ghost" data-close>关闭</button></div>
+      <input type="hidden" name="id">
+      <label>类型<select name="type" required><option value="paper">论文</option><option value="reading">阅读</option><option value="fitness">健身</option><option value="other">普通任务</option><option value="course">临时课程</option></select></label>
+      <label>任务名称<input name="title" required maxlength="60" placeholder="例如：修改论文第一部分"></label>
+      <div class="form-row"><label>日期<input type="date" name="date" required></label><label>开始时间<input type="time" name="start" required></label></div>
+      <div class="form-row"><label>预计分钟<input type="number" name="minutes" min="15" step="15" value="60"></label><label>优先级<select name="priority"><option>高</option><option selected>中</option><option>低</option></select></label></div>
+      <label>备注<textarea name="notes" rows="3" placeholder="可选"></textarea></label>
+      <button class="primary" value="save">保存任务</button>
+    </form>
+  </dialog>
+  <dialog id="paperDialog"><form id="paperForm" method="dialog"><div class="dialog-head"><h2>新增论文项目</h2><button type="button" class="ghost" data-close>关闭</button></div><label>项目名称<input name="title" required maxlength="80"></label><label>类型<select name="kind"><option>毕业论文</option><option>课程论文</option><option>小论文</option></select></label><label>当前阶段<select name="stage"></select></label><button class="primary" value="save">创建项目</button></form></dialog>
+  <dialog id="bookDialog"><form id="bookForm" method="dialog"><div class="dialog-head"><h2>添加书籍</h2><button type="button" class="ghost" data-close>关闭</button></div><label>书名<input name="title" required></label><label>作者<input name="author"></label><div class="form-row"><label>总页数<input name="total" type="number" min="1" required></label><label>当前页<input name="current" type="number" min="0" value="0"></label></div><button class="primary" value="save">添加书籍</button></form></dialog>
+  <script src="data.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
+
